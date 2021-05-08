@@ -33,7 +33,8 @@ export async function getPaginatedCars(query) {
   );
 
   const totalRowsPromise = db.get<{ count: number }>(
-    `select COUNT(*) as count ${mainQuery}`
+    `select COUNT(*) as count ${mainQuery}`,
+    { ...dbParams }
   );
 
   const [cars, totalRows] = await Promise.all([carsPromise, totalRowsPromise]);
